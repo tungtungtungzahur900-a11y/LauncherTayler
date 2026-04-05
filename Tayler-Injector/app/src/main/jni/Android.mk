@@ -1,18 +1,22 @@
 LOCAL_PATH := $(call my-dir)
 
-# 1. Подключаем твою готовую либу
+# 1. РџРѕРґРєР»СЋС‡Р°РµРј РіРѕС‚РѕРІСѓСЋ Р»РёР±Сѓ Oxide
 include $(CLEAR_VARS)
-LOCAL_MODULE := OxideInternal_prebuilt
-LOCAL_SRC_FILES := ../OxideInternal/ARM64/Debug/libOxideInternal.so
+LOCAL_MODULE := OxideInternal
+# РџСѓС‚СЊ Рє Р»РёР±Рµ РѕС‚РЅРѕСЃРёС‚РµР»СЊРЅРѕ СЌС‚РѕРіРѕ С„Р°Р№Р»Р° (jni)
+LOCAL_SRC_FILES := ../jniLibs/arm64-v8a/libOxideInternal.so
 include $(PREBUILT_SHARED_LIBRARY)
 
-# 2. Собираем наш новый чит
+# 2. РЎРѕР±РёСЂР°РµРј СЃР°Рј С‡РёС‚
 include $(CLEAR_VARS)
-LOCAL_MODULE    := TaylerMenu
-LOCAL_SRC_FILES := main.cpp OxideInternal.cpp
-# Если добавишь ImGui, впиши сюда файлы: imgui.cpp imgui_draw.cpp и т.д.
+LOCAL_MODULE := TaylerCheat
 
-LOCAL_LDLIBS    := -llog -landroid -lGLESv2 -lEGL
-LOCAL_SHARED_LIBRARIES := OxideInternal_prebuilt
+# РўРІРѕРё С„Р°Р№Р»С‹ СЃРѕ СЃРєСЂРёРЅР° 40
+LOCAL_SRC_FILES := main.cpp \
+                   MenuGUI.cpp \
+                   OxideInternal.cpp
+
+LOCAL_LDLIBS := -llog -landroid -lgcc
+LOCAL_SHARED_LIBRARIES := OxideInternal
 
 include $(BUILD_SHARED_LIBRARY)
