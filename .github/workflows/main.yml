@@ -19,11 +19,12 @@ jobs:
         distribution: 'temurin'
 
     - name: Build with Gradle
-      # Мы убрали ./gradlew и теперь используем просто gradle
+      # Мы говорим Гитхабу работать внутри папки Tayler-Injector
       run: gradle assembleDebug
+      working-directory: ./Tayler-Injector
 
     - name: Upload APK
       uses: actions/upload-artifact@v4
       with:
         name: Tayler-Cheat-APK
-        path: app/build/outputs/apk/debug/*.apk
+        path: Tayler-Injector/app/build/outputs/apk/debug/*.apk
